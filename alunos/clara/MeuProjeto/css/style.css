@@ -1,0 +1,125 @@
+
+
+
+.navbar .nav-link {
+  color: black;
+  font-size: 18px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar .nav-link:hover {
+  color: rgb(255, 98, 0);
+  border-bottom: 2px solid rgb(255, 98, 0);
+}
+
+.navbar-nav {
+  margin-center: auto;
+  gap: 20px;
+}
+
+.navbar {
+  padding: 15px 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-link i {
+  color:rgb(255, 98, 0);
+}
+
+/* CARDS */
+
+.card {
+  transition: 0.3s;
+  cursor: center;
+    height:100%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+
+/* IMAGE */
+
+
+.img-carro{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.row .col-md-6{
+  display:flex;
+}
+
+.col-md-4{
+  display: flex;
+}
+
+/* PHONE */
+.phone-link{
+  position: relative;
+}
+
+.phone-link:hover::after{
+  content: "🕿 +55 (51) 99999-9999";
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: orangered;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+
+/* FOOTER */ 
+.footer{
+  background-color:#1a1a1a;
+  color:white;
+  margin-top:60px;
+  padding:40px 20px;
+}
+
+.footer-container{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+.footer-title{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.footer-text{
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.footer-contact{
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+.footer-copy{
+  font-size:13px;
+  color:#ccc;
+}
+
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
