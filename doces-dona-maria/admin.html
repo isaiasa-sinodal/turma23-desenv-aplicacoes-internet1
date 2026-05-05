@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Doces da Dona Maria</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- HEADER ADMIN -->
+  <header class="header-admin">
+    <div class="admin-logo">
+      <div class="admin-logo-icone">🍬</div>
+      <div>
+        <h1>Painel Admin</h1>
+        <span>Doces da Dona Maria</span>
+      </div>
+    </div>
+    <div class="header-acoes">
+      <a href="index.html" class="btn-header btn-catalogo">← Ver catálogo</a>
+      <button class="btn-header btn-sair" onclick="AdminController.logout()">Sair</button>
+    </div>
+  </header>
+
+  <!-- TELA DE LOGIN -->
+  <div id="tela-login" class="tela-login">
+    <div class="caixa-login">
+      <div class="login-emoji">🔐</div>
+      <h2>Área restrita</h2>
+      <p>Insira a senha para acessar o painel administrativo.</p>
+
+      <div class="campo-login">
+        <label for="senha-input">Senha</label>
+        <input type="password" id="senha-input" placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <p class="erro-login" id="erro-login" role="alert"></p>
+
+      <button class="btn-entrar" onclick="AdminController.tentarLogin()">Entrar</button>
+
+      <p class="login-dica">💡 Dica: a senha padrão é <strong>maria123</strong></p>
+    </div>
+  </div>
+
+  <!-- PAINEL ADMIN (oculto até login) -->
+  <div id="painel-admin" class="painel-admin oculto">
+
+    <!-- Estatísticas -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icone">🍬</div>
+        <div>
+          <div class="stat-valor" id="stat-total">0</div>
+          <div class="stat-label">Doces cadastrados</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icone">📂</div>
+        <div>
+          <div class="stat-valor" id="stat-categorias">0</div>
+          <div class="stat-label">Categorias</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icone">💰</div>
+        <div>
+          <div class="stat-valor" id="stat-media">R$ 0</div>
+          <div class="stat-label">Preço médio</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout: formulário + lista -->
+    <div class="layout-admin">
+
+      <!-- FORMULÁRIO (Create / Update) -->
+      <aside class="painel-form">
+        <h2 class="painel-titulo" id="titulo-form">Cadastrar Doce</h2>
+
+        <div class="preview-box">
+          <img id="preview-imagem"
+            src="https://images.unsplash.com/photo-1548365328-8c6ef28f7f51?w=400&q=80"
+            alt="Preview do doce">
+        </div>
+
+        <form id="form-doce" novalidate>
+          <div class="campo-form">
+            <label for="campo-nome">Nome do doce *</label>
+            <input type="text" id="campo-nome" placeholder="Ex: Brigadeiro Clássico" maxlength="80">
+          </div>
+
+          <div class="campo-form">
+            <label for="campo-descricao">Descrição *</label>
+            <textarea id="campo-descricao" placeholder="Descreva o doce com detalhes..." maxlength="300"></textarea>
+          </div>
+
+          <div class="campo-form">
+            <label for="campo-preco">Preço (R$) *</label>
+            <input type="number" id="campo-preco" placeholder="0.00" min="0.01" step="0.01">
+          </div>
+
+          <div class="campo-form">
+            <label for="campo-imagem">URL da imagem</label>
+            <input type="url" id="campo-imagem" placeholder="https://...">
+          </div>
+
+          <div class="campo-form">
+            <label for="campo-categoria">Categoria *</label>
+            <select id="campo-categoria">
+              <option value="">Selecione...</option>
+              <option value="brigadeiros">Brigadeiros</option>
+              <option value="bolos">Bolos</option>
+              <option value="tortas">Tortas</option>
+              <option value="trufas">Trufas</option>
+              <option value="docinhos">Docinhos</option>
+              <option value="outros">Outros</option>
+            </select>
+          </div>
+
+          <ul id="erros-form" role="alert"></ul>
+
+          <div class="form-btns">
+            <button type="submit" class="btn-salvar" id="btn-salvar">Cadastrar</button>
+            <button type="button" class="btn-cancelar oculto" id="btn-cancelar"
+                    onclick="AdminController.cancelarEdicao()">Cancelar</button>
+          </div>
+        </form>
+      </aside>
+
+      <!-- LISTA DE DOCES -->
+      <main class="painel-lista">
+        <div class="lista-header">
+          <h2 class="painel-titulo" style="border:none;padding:0;margin:0">Doces cadastrados</h2>
+
+          <div class="lista-acoes">
+            <button class="btn-exportar" onclick="AdminController.exportarJSON()" title="Exportar dados como JSON">
+              📥 Exportar JSON
+            </button>
+            <button class="btn-importar" onclick="AdminController.importarJSON()" title="Importar dados de um arquivo JSON">
+              📤 Importar JSON
+            </button>
+            <button class="btn-resetar" onclick="AdminController.resetarDados()" title="Restaurar dados originais">
+              ♻️ Resetar
+            </button>
+          </div>
+
+          <div class="busca-admin-wrapper">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="search" id="busca-admin" placeholder="Filtrar lista..." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="tabela-wrapper">
+          <table class="tabela-doces" aria-label="Lista de doces cadastrados">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Categoria</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-doces">
+              <!-- preenchido pelo AdminController -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+    </div><!-- fim .layout-admin -->
+  </div><!-- fim #painel-admin -->
+
+  <!-- TOAST DE NOTIFICAÇÃO -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- SCRIPTS -->
+  <script src="js/data/initialData.js"></script>
+  <script src="js/models/Candy.js"></script>
+  <script src="js/services/StorageService.js"></script>
+  <script src="js/controllers/AdminController.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      AdminController.init();
+    });
+  </script>
+
+</body>
+</html>

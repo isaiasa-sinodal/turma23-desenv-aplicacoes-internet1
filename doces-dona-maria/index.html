@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doces da Dona Maria — Catálogo</title>
+  <meta name="description" content="Doces artesanais feitos com amor. Brigadeiros, bolos, tortas e muito mais.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER / NAVEGAÇÃO -->
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-icone">🍬</div>
+        <div class="logo-texto">
+          <h1>Doces da Dona Maria</h1>
+          <span>Feito com amor desde sempre</span>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li>
+          <a href="admin.html" class="btn-admin-nav">Área Admin</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-conteudo">
+      <p class="hero-subtitulo">✨ Artesanal &amp; Feito no dia</p>
+      <h2 class="hero-titulo">
+        Doces que contam<br><em>histórias de afeto</em>
+      </h2>
+      <p class="hero-descricao">
+        Brigadeiros, bolos, tortas e trufas preparados com ingredientes selecionados e muito carinho.
+        Cada doce é uma experiência única.
+      </p>
+      <div class="hero-ctas">
+        <a href="#catalogo" class="btn-primario">
+          <span>🍫</span> Ver catálogo
+        </a>
+        <a href="https://wa.me/5551999999999?text=Olá%2C%20Dona%20Maria!%20Quero%20fazer%20um%20pedido%20🍬"
+           target="_blank" class="btn-secundario">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.855L0 24l6.335-1.658A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.003-1.367l-.36-.214-3.76.984.999-3.66-.235-.374A9.818 9.818 0 012.182 12C2.182 6.574 6.574 2.182 12 2.182c5.426 0 9.818 4.392 9.818 9.818 0 5.426-4.392 9.818-9.818 9.818z"/>
+          </svg>
+          Entrar em contato
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section id="catalogo" class="secao-catalogo">
+    <h2 class="secao-titulo">Nossos Doces</h2>
+    <p class="secao-subtitulo">Escolha o seu favorito e peça direto pelo WhatsApp</p>
+
+    <!-- Busca -->
+    <div class="barra-busca">
+      <div class="busca-wrapper">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="search" id="busca" placeholder="Buscar doces..." autocomplete="off">
+      </div>
+    </div>
+
+    <!-- Filtros de categoria -->
+    <div id="filtros" role="group" aria-label="Filtrar por categoria">
+      <button class="filtro-btn ativo" data-categoria="todos">Todos</button>
+      <!-- demais categorias são inseridas pelo CatalogController -->
+    </div>
+
+    <!-- Grid de produtos -->
+    <div id="catalogo-grid" class="catalogo-grid" aria-live="polite">
+      <!-- preenchido pelo JavaScript -->
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="secao-sobre">
+    <div class="sobre-conteudo">
+      <div class="sobre-emoji">👩‍🍳</div>
+      <h2>A história da Dona Maria</h2>
+      <p>
+        Há mais de 20 anos, a Dona Maria transforma ingredientes simples em momentos especiais.
+        Cada receita é guardada com carinho, passada de geração em geração, e preparada
+        diariamente com produtos frescos e selecionados. Um doce, uma memória.
+      </p>
+      <a href="https://wa.me/5551999999999?text=Olá%2C%20Dona%20Maria!%20Gostaria%20de%20saber%20mais%20sobre%20seus%20doces%20🍬"
+         target="_blank" class="contato-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.855L0 24l6.335-1.658A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.003-1.367l-.36-.214-3.76.984.999-3.66-.235-.374A9.818 9.818 0 012.182 12C2.182 6.574 6.574 2.182 12 2.182c5.426 0 9.818 4.392 9.818 9.818 0 5.426-4.392 9.818-9.818 9.818z"/>
+        </svg>
+        Falar com a Dona Maria
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 <strong>Doces da Dona Maria</strong> — Feitos com amor, entregues com carinho 🍬</p>
+  </footer>
+
+  <!-- SCRIPTS (ordem importa: dados → model → service → controller → init) -->
+  <script src="js/data/initialData.js"></script>
+  <script src="js/models/Candy.js"></script>
+  <script src="js/services/StorageService.js"></script>
+  <script src="js/controllers/CatalogController.js"></script>
+  <script>
+    // Ponto de entrada da página pública
+    document.addEventListener("DOMContentLoaded", () => {
+      CatalogController.init();
+    });
+  </script>
+
+</body>
+</html>
