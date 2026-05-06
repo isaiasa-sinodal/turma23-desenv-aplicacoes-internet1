@@ -7,7 +7,7 @@ const INITIAL_DATA = [
     nome: "Brigadeiro Clássico",
     descricao: "O tradicional brigadeiro de chocolate ao leite, feito com leite condensado e muito amor. Cobertura de granulado belga.",
     preco: 4.50,
-    imagem: "https://images.unsplash.com/photo-1548365328-8c6ef28f7f51?w=400&q=80",
+    imagem: "https://images.unsplash.com/photo-1630953900039-960a64b49176?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YnJpZ2FkZWlybyUyMGNsJUMzJUExc3NpY298ZW58MHx8MHx8fDA%3D",
     categoria: "brigadeiros"
   },
   {
@@ -15,7 +15,7 @@ const INITIAL_DATA = [
     nome: "Brigadeiro de Pistache",
     descricao: "Versão sofisticada com creme de pistache importado. Um equilíbrio perfeito entre doce e amendoado.",
     preco: 7.00,
-    imagem: "https://images.unsplash.com/photo-1567206563114-c179706a56bf?w=400&q=80",
+    imagem: "https://images.unsplash.com/photo-1765946024682-0098eacb2432?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     categoria: "brigadeiros"
   },
   {

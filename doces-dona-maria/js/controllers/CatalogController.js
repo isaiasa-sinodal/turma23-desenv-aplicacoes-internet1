@@ -6,7 +6,7 @@ const CatalogController = (() => {
   let filtroCategoria = "todos";
   let termoBusca = "";
 
-  const WHATSAPP_NUMERO = "5551999999999"; // Troque pelo número real
+  const WHATSAPP_NUMERO = "5551995154309";
 
   function init() {
     todosOsDoces = StorageService.carregar();
