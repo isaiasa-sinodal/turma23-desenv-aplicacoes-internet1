@@ -6,6 +6,43 @@
   <title>Doces da Dona Maria — Catálogo</title>
   <meta name="description" content="Doces artesanais feitos com amor. Brigadeiros, bolos, tortas e muito mais.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Tema Escuro (Dark Mode) - Dica: Você pode mover isso para o seu arquivo css/style.css depois */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark-mode .header,
+    body.dark-mode .footer {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+    }
+    body.dark-mode .nav-links a {
+      color: #e0e0e0;
+    }
+    body.dark-mode .secao-sobre,
+    body.dark-mode .hero {
+      background-color: #181818;
+    }
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+      color: #ffffff;
+    }
+    body.dark-mode .card-doce {
+      background-color: #1f1f1f;
+      box-shadow: 0 4px 6px rgba(255,255,255,0.05);
+      color: #e0e0e0;
+    }
+    body.dark-mode .card-descricao {
+      color: #b0b0b0;
+    }
+    .btn-dark-mode {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0 0.5rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -21,6 +58,7 @@
       </div>
 
       <ul class="nav-links">
+        <li><button id="btn-dark-mode" class="btn-dark-mode" title="Alternar tema">🌙</button></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#sobre">Sobre</a></li>
         <li>

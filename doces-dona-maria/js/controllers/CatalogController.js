@@ -9,6 +9,7 @@ const CatalogController = (() => {
   const WHATSAPP_NUMERO = "5551995154309";
 
   function init() {
+    _initDarkMode();
     todosOsDoces = StorageService.carregar();
     _renderizarCategorias();
     _renderizarCatalogo();
@@ -34,6 +35,12 @@ const CatalogController = (() => {
         _renderizarCatalogo();
       });
     });
+
+    // Toggle Dark Mode
+    const btnDark = document.getElementById("btn-dark-mode");
+    if (btnDark) {
+      btnDark.addEventListener("click", _toggleDarkMode);
+    }
   }
 
   function _filtrarDoces() {
@@ -128,6 +135,26 @@ const CatalogController = (() => {
       outros: "Outros"
     };
     return nomes[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+  }
+
+  // --- Dark Mode ---
+  function _initDarkMode() {
+    const isDark = localStorage.getItem("tema_escuro") === "true";
+    if (isDark) {
+      document.body.classList.add("dark-mode");
+      _atualizarIconeDark(true);
+    }
+  }
+
+  function _toggleDarkMode() {
+    const isDark = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("tema_escuro", isDark);
+    _atualizarIconeDark(isDark);
+  }
+
+  function _atualizarIconeDark(isDark) {
+    const btn = document.getElementById("btn-dark-mode");
+    if (btn) btn.textContent = isDark ? "☀️" : "🌙";
   }
 
   return { init, pedirWhatsApp };
