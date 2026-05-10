@@ -65,7 +65,7 @@ const INITIAL_DATA = [
     preco: 8.50,
     imagem: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80",
     categoria: "trufas"
-  }
+  },
 
   {
     "id": "9",
