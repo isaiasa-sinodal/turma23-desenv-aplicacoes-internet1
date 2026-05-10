@@ -31,12 +31,12 @@ const INITIAL_DATA = [
     nome: "Bolo Red Velvet",
     descricao: "Clássico americano com massa aveludada e cobertura de cream cheese. Recheio duplo de baunilha.",
     preco: 95.00,
-    imagem: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&q=80",
+    imagem: "https://www.receitasnestle.com.br/sites/default/files/styles/recipe_detail_desktop_new/public/srh_recipes/4f012df686c9759da04453742d8f3360.webp?itok=1FARFT0r",
     categoria: "bolos"
   },
   {
     id: "5",
-    nome: "Torta de Limão",
+    nome: "Torta de Limão com Framboesa",
     descricao: "Base crocante de biscoito, creme azedo de limão siciliano e merengue italiano maçaricado na hora.",
     preco: 55.00,
     imagem: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&q=80",
@@ -55,7 +55,7 @@ const INITIAL_DATA = [
     nome: "Trufa de Chocolate Belga",
     descricao: "Trufas artesanais feitas com chocolate belga 70% cacau. Recheio cremoso e casca fina crocante.",
     preco: 8.00,
-    imagem: "https://images.unsplash.com/photo-1511381939415-e44015466834?w=400&q=80",
+    imagem: "https://images.tcdn.com.br/img/img_prod/983116/trufa_chocolate_belga_70_cacau_33_1_7da58204b6f8653c38febc03b4c21d10.jpg",
     categoria: "trufas"
   },
   {
@@ -65,5 +65,15 @@ const INITIAL_DATA = [
     preco: 8.50,
     imagem: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400&q=80",
     categoria: "trufas"
+  }
+
+  {
+    "id": "9",
+    "nome": "Quindim",
+    "descricao": "O quindim mais gostoso da sua vida.",
+    "preco": 7,
+    "imagem": "https://www.osazeitesdaespanha.com/wp-content/uploads/2024/05/Receita-Quindim.jpg.webp",
+    "categoria": "docinhos",
+    "criadoEm": "2026-05-10T19:17:53.752Z"
   }
 ];

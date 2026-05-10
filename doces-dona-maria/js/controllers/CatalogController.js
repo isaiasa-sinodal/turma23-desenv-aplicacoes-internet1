@@ -121,7 +121,7 @@ const CatalogController = (() => {
   }
 
   function pedirWhatsApp(nome, preco) {
-    const mensagem = encodeURIComponent(`Olá, Dona Maria! 🍬 Gostaria de pedir: *${nome}* (${preco}). Poderia me dar mais informações?`);
+    const mensagem = encodeURIComponent(`Olá, Dona Maria! Gostaria de pedir: *${nome}* (${preco}). Poderia me dar mais informações?`);
     window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, "_blank");
   }
 
