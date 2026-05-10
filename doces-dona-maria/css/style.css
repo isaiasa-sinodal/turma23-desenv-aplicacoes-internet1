@@ -485,3 +485,48 @@ button { cursor: pointer; font-family: inherit; border: none; }
 
   .secao-catalogo { padding: 2rem 1rem; }
 }
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+ body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    body.dark-mode .header,
+    body.dark-mode .footer {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+    }
+    body.dark-mode .nav-links a {
+      color: #e0e0e0;
+    }
+    body.dark-mode .secao-sobre,
+    body.dark-mode .hero {
+      background-color: #181818;
+    }
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+      color: #ffffff;
+    }
+    body.dark-mode .secao-subtitulo {
+      color: #b0b0b0;
+    }
+    body.dark-mode .card-doce {
+      background-color: #1f1f1f;
+      box-shadow: 0 4px 6px rgba(255,255,255,0.05);
+      color: #e0e0e0;
+    }
+    body.dark-mode .card-descricao {
+      color: #b0b0b0;
+    }
+    body.dark-mode .card-preco {
+      color: var(--pessego-cl);
+    }
+    .btn-dark-mode {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0 0.5rem;
+    }
