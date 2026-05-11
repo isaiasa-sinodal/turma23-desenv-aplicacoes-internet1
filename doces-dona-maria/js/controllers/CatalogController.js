@@ -9,6 +9,7 @@ const CatalogController = (() => {
   const WHATSAPP_NUMERO = "5551995154309";
 
   function init() {
+    _initLGPD();
     _initDarkMode();
     todosOsDoces = StorageService.carregar();
     _renderizarCategorias();
@@ -120,8 +121,11 @@ const CatalogController = (() => {
   }
 
   function pedirWhatsApp(nome, preco) {
-    const mensagem = encodeURIComponent(`Olá, Dona Maria! Gostaria de pedir: *${nome}* (${preco}). Poderia me dar mais informações?`);
-    window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, "_blank");
+    // Aviso LGPD antes de redirecionar para fora da aplicação
+    if (confirm("Aviso de Privacidade: Você será redirecionado para o WhatsApp. A loja terá acesso ao seu número de telefone. Deseja continuar?")) {
+      const mensagem = encodeURIComponent(`Olá, Dona Maria! Gostaria de pedir: *${nome}* (${preco}). Poderia me dar mais informações?`);
+      window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, "_blank");
+    }
   }
 
   function _nomearCategoria(cat) {
@@ -156,5 +160,36 @@ const CatalogController = (() => {
     if (btn) btn.textContent = isDark ? "☀️" : "🌙";
   }
 
-  return { init, pedirWhatsApp };
+  // --- LGPD ---
+  function _initLGPD() {
+    if (!localStorage.getItem("lgpd_consent")) {
+      const banner = document.createElement("div");
+      banner.id = "lgpd-banner";
+      banner.innerHTML = `
+        <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #3D1C02; color: #FFF8F0; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; box-shadow: 0 -2px 10px rgba(0,0,0,0.4); flex-wrap: wrap; gap: 10px; font-family: 'DM Sans', sans-serif;">
+          <p style="margin: 0; font-size: 0.9rem; flex: 1; min-width: 250px; line-height: 1.4;">
+            <strong>Aviso de Privacidade:</strong> Utilizamos o armazenamento local do seu navegador apenas para salvar preferências do sistema para o site funcionar corretamente. Nenhum dado pessoal é rastreado ou coletado.
+          </p>
+          <button id="lgpd-btn-catalog" style="background: #C9784A; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: 0.2s;">
+            Entendi
+          </button>
+        </div>
+      `;
+      document.body.appendChild(banner);
+      document.getElementById("lgpd-btn-catalog").addEventListener("click", () => {
+        localStorage.setItem("lgpd_consent", "true");
+        banner.remove();
+      });
+    }
+  }
+
+  function revogarLGPD() {
+    if (confirm("Deseja revogar seu consentimento de privacidade? Suas preferências salvas serão perdidas.")) {
+      localStorage.removeItem("lgpd_consent");
+      localStorage.removeItem("tema_escuro");
+      location.reload();
+    }
+  }
+
+  return { init, pedirWhatsApp, revogarLGPD };
 })();

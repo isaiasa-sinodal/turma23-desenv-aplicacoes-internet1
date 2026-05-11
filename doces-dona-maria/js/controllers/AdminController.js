@@ -9,6 +9,7 @@ const AdminController = (() => {
   const SENHA_ADMIN = "maria123"; // Autenticação fictícia simples
 
   function init() {
+    _initLGPD();
     _verificarAutenticacao();
     _registrarEventos();
   }
@@ -292,6 +293,37 @@ const AdminController = (() => {
     setTimeout(() => toast.classList.remove("visivel"), 3000);
   }
 
+  // --- LGPD ---
+  function _initLGPD() {
+    if (!localStorage.getItem("lgpd_consent")) {
+      const banner = document.createElement("div");
+      banner.id = "lgpd-banner";
+      banner.innerHTML = `
+        <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: var(--chocolate, #3D1C02); color: var(--creme, #FFF8F0); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10000; box-shadow: 0 -2px 10px rgba(0,0,0,0.4); flex-wrap: wrap; gap: 10px; font-family: 'DM Sans', sans-serif;">
+          <p style="margin: 0; font-size: 0.9rem; flex: 1; min-width: 250px; line-height: 1.4;">
+            <strong>Aviso de Privacidade:</strong> O painel utiliza sessões e armazenamento local do navegador para manter sua autenticação e salvar dados inseridos. 
+          </p>
+          <button id="lgpd-btn-admin" style="background: var(--caramelo, #C9784A); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 500; transition: 0.2s;">
+            Entendi
+          </button>
+        </div>
+      `;
+      document.body.appendChild(banner);
+      document.getElementById("lgpd-btn-admin").addEventListener("click", () => {
+        localStorage.setItem("lgpd_consent", "true");
+        banner.remove();
+      });
+    }
+  }
+
+  function revogarLGPD() {
+    if (confirm("Deseja revogar seu consentimento de armazenamento? Você será deslogado do painel.")) {
+      localStorage.removeItem("lgpd_consent");
+      logout();
+      location.reload();
+    }
+  }
+
   return {
     init,
     tentarLogin,
@@ -301,6 +333,7 @@ const AdminController = (() => {
     cancelarEdicao,
     exportarJSON,
     importarJSON,
-    resetarDados
+    resetarDados,
+    revogarLGPD
   };
 })();
