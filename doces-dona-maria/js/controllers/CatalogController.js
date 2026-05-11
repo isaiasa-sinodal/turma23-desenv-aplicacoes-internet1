@@ -5,6 +5,8 @@ const CatalogController = (() => {
   let todosOsDoces = [];
   let filtroCategoria = "todos";
   let termoBusca = "";
+  let carrinho = [];
+  let enderecoCheckout = "";
 
   const WHATSAPP_NUMERO = "5551995154309";
 
@@ -15,6 +17,7 @@ const CatalogController = (() => {
     _renderizarCategorias();
     _renderizarCatalogo();
     _registrarEventos();
+    _initCarrinho();
   }
 
   function _registrarEventos() {
@@ -107,12 +110,8 @@ const CatalogController = (() => {
         <p class="card-descricao">${doce.descricao}</p>
         <div class="card-rodape">
           <span class="card-preco">${doce.precoFormatado}</span>
-          <button class="btn-whatsapp" onclick="CatalogController.pedirWhatsApp('${doce.nome}', '${doce.precoFormatado}')">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.855L0 24l6.335-1.658A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 01-5.003-1.367l-.36-.214-3.76.984.999-3.66-.235-.374A9.818 9.818 0 012.182 12C2.182 6.574 6.574 2.182 12 2.182c5.426 0 9.818 4.392 9.818 9.818 0 5.426-4.392 9.818-9.818 9.818z"/>
-            </svg>
-            Pedir pelo WhatsApp
+          <button class="btn-whatsapp" onclick="CatalogController.adicionarAoCarrinho('${doce.id}')" title="Adicionar doce ao carrinho">
+            🛒 Adicionar ao Carrinho
           </button>
         </div>
       </div>
@@ -125,6 +124,137 @@ const CatalogController = (() => {
     if (confirm("Aviso de Privacidade: Você será redirecionado para o WhatsApp. A loja terá acesso ao seu número de telefone. Deseja continuar?")) {
       const mensagem = encodeURIComponent(`Olá, Dona Maria! Gostaria de pedir: *${nome}* (${preco}). Poderia me dar mais informações?`);
       window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, "_blank");
+    }
+  }
+
+  // --- Carrinho, Consumo de API (ViaCEP) e Checkout ---
+  function _initCarrinho() {
+    const btnAbrir = document.getElementById("btn-carrinho");
+    const modal = document.getElementById("modal-carrinho");
+    const btnFechar = document.getElementById("btn-fechar-carrinho");
+    const btnBuscaCep = document.getElementById("btn-buscar-cep");
+    const btnFinalizar = document.getElementById("btn-finalizar-pedido");
+
+    if(btnAbrir) btnAbrir.addEventListener("click", () => modal.classList.remove("oculto"));
+    if(btnFechar) btnFechar.addEventListener("click", () => modal.classList.add("oculto"));
+    if(btnBuscaCep) btnBuscaCep.addEventListener("click", _buscarCep);
+    if(btnFinalizar) btnFinalizar.addEventListener("click", _finalizarPedido);
+  }
+
+  function adicionarAoCarrinho(id) {
+    const doce = todosOsDoces.find(d => d.id === id);
+    if(doce) {
+      carrinho.push(doce);
+      _atualizarCarrinho();
+      // Feedback simples
+      const contador = document.getElementById("carrinho-contador");
+      contador.style.transform = "scale(1.5)";
+      setTimeout(() => contador.style.transform = "scale(1)", 200);
+    }
+  }
+
+  function removerDoCarrinho(index) {
+    carrinho.splice(index, 1);
+    _atualizarCarrinho();
+  }
+
+  function _atualizarCarrinho() {
+    const contador = document.getElementById("carrinho-contador");
+    const lista = document.getElementById("carrinho-itens");
+    const labelTotal = document.getElementById("carrinho-total-valor");
+
+    if(contador) contador.textContent = carrinho.length;
+
+    if(lista) {
+      lista.innerHTML = "";
+      if(carrinho.length === 0) {
+        lista.innerHTML = "<p style='text-align:center;color:#6B3517'>O carrinho está vazio.</p>";
+      }
+      let total = 0;
+      carrinho.forEach((item, i) => {
+        total += item.preco;
+        lista.innerHTML += `
+          <div class="carrinho-item">
+            <div class="carrinho-item-info">
+              <strong>${item.nome}</strong>
+              <span>${item.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+            </div>
+            <button class="btn-remover-item" onclick="CatalogController.removerDoCarrinho(${i})">Remover</button>
+          </div>
+        `;
+      });
+      if(labelTotal) labelTotal.textContent = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+  }
+
+  async function _buscarCep() {
+    const input = document.getElementById("cep-entrega");
+    const label = document.getElementById("endereco-entrega");
+    const inputNumero = document.getElementById("numero-entrega");
+    const cep = input.value.replace(/\D/g, "");
+
+    if (cep.length !== 8) {
+      label.textContent = "CEP inválido. Digite 8 números.";
+      label.style.color = "#C0392B";
+      if(inputNumero) inputNumero.style.display = "none";
+      return;
+    }
+
+    label.textContent = "Buscando endereço... ⏳";
+    label.style.color = "inherit";
+    if(inputNumero) inputNumero.style.display = "none";
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
+      if (data.erro) {
+        label.textContent = "CEP não encontrado 😢";
+        enderecoCheckout = "";
+      } else {
+        enderecoCheckout = `${data.logradouro}, ${data.bairro} - ${data.localidade}/${data.uf}`;
+        label.textContent = `🚚 Entrega em: ${enderecoCheckout}`;
+        if(inputNumero) {
+          inputNumero.style.display = "block";
+          inputNumero.focus();
+        }
+      }
+    } catch (err) {
+      label.textContent = "Erro ao buscar CEP.";
+      console.error(err);
+    }
+  }
+
+  function _finalizarPedido() {
+    if(carrinho.length === 0) {
+      alert("Seu carrinho está vazio!");
+      return;
+    }
+    let total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+    let itensTexto = carrinho.map(item => `- ${item.nome}`).join("%0A");
+    let totalTexto = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+    let mensagem = `Olá, Dona Maria! Gostaria de fazer o seguinte pedido:%0A%0A${itensTexto}%0A%0A*Total:* ${totalTexto}`;
+    if(enderecoCheckout) {
+      const inputNumero = document.getElementById("numero-entrega");
+      let numeroCompl = inputNumero && inputNumero.value.trim() !== "" ? inputNumero.value.trim() : "Sem número";
+      mensagem += `%0A%0A*Endereço de entrega:*%0A${enderecoCheckout}, ${numeroCompl}`;
+    }
+
+    if (confirm("Você será redirecionado para o WhatsApp para enviar o pedido à loja. Continuar?")) {
+       window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${mensagem}`, "_blank");
+       carrinho = []; // Esvazia o carrinho
+       _atualizarCarrinho();
+       document.getElementById("modal-carrinho").classList.add("oculto");
+       
+       // Limpa os campos de endereço para a próxima compra
+       document.getElementById("cep-entrega").value = "";
+       document.getElementById("endereco-entrega").textContent = "";
+       const inputNumero = document.getElementById("numero-entrega");
+       if(inputNumero) {
+         inputNumero.value = "";
+         inputNumero.style.display = "none";
+       }
+       enderecoCheckout = "";
     }
   }
 
@@ -191,5 +321,12 @@ const CatalogController = (() => {
     }
   }
 
-  return { init, pedirWhatsApp, revogarLGPD };
+  return {
+    init,
+    pedirWhatsApp,
+    revogarLGPD,
+    // Expõe métodos usados externamente no HTML:
+    adicionarAoCarrinho,
+    removerDoCarrinho
+  };
 })();

@@ -88,6 +88,39 @@
     <p>© 2025 <strong>Doces da Dona Maria</strong> — Feitos com amor, entregues com carinho</p>
   </footer>
 
+  <!-- CARRINHO FLUTUANTE -->
+  <button id="btn-carrinho" class="btn-carrinho" aria-label="Abrir carrinho">
+    🛒 <span id="carrinho-contador">0</span>
+  </button>
+
+  <!-- MODAL DO CARRINHO (CHECKOUT FICTÍCIO) -->
+  <div id="modal-carrinho" class="modal oculto">
+    <div class="modal-conteudo">
+      <div class="modal-header">
+        <h2>Seu Carrinho</h2>
+        <button id="btn-fechar-carrinho" class="btn-fechar" title="Fechar">&times;</button>
+      </div>
+      <div id="carrinho-itens" class="carrinho-itens">
+        <!-- preenchido pelo JS -->
+      </div>
+      <div class="carrinho-footer">
+        <div class="carrinho-total">Total: <strong id="carrinho-total-valor">R$ 0,00</strong></div>
+        <div class="checkout-cep">
+          <label for="cep-entrega">CEP de Entrega (ViaCEP):</label>
+          <div style="display:flex; gap:0.5rem; margin-top:0.3rem">
+            <input type="text" id="cep-entrega" placeholder="Somente números..." maxlength="8">
+            <button id="btn-buscar-cep">Buscar</button>
+          </div>
+          <small id="endereco-entrega"></small>
+          <input type="text" id="numero-entrega" placeholder="Número e complemento (ex: 123, Ap 4)" style="display: none; width: 100%; margin-top: 0.5rem;">
+        </div>
+        <button id="btn-finalizar-pedido" class="btn-whatsapp" style="width:100%; justify-content:center; margin-top: 1.2rem;">
+          Finalizar Pedido via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPTS (ordem importa: dados → model → service → controller → init) -->
   <script src="js/data/initialData.js"></script>
   <script src="js/models/Candy.js"></script>

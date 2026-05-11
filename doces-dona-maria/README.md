@@ -62,7 +62,10 @@ O projeto é 100% frontend estático — **não precisa de servidor**.
 - Catálogo com grade responsiva de cards de doces
 - Busca em tempo real por nome e descrição
 - Filtros por categoria (dinâmicos, gerados a partir dos dados)
-- Botão **"Pedir pelo WhatsApp"** em cada card (abre conversa com mensagem pré-preenchida)
+- **Carrinho de Compras** flutuante com contador em tempo real
+- **Checkout fictício** (modal) para revisar o pedido e visualizar o valor total
+- **Consumo de API Externa (ViaCEP)** utilizando `fetch` para busca e preenchimento automático do endereço de entrega
+- Envio do resumo do pedido completo (itens, total e endereço) formatado diretamente para o **WhatsApp**
 - Botão **"Entrar em contato"** no hero e na seção "Sobre"
 
 ### Painel administrativo (`admin.html`)

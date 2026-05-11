@@ -487,6 +487,50 @@ button { cursor: pointer; font-family: inherit; border: none; }
 }
 
 /* ============================================
+   CARRINHO E MODAL (CHECKOUT FICTÍCIO)
+   ============================================ */
+.btn-carrinho {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  background: var(--caramelo); color: #fff;
+  width: 60px; height: 60px; border-radius: 50%;
+  font-size: 1.5rem; box-shadow: var(--sombra-hover);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 90; transition: transform var(--transicao), background var(--transicao);
+}
+.btn-carrinho:hover { transform: scale(1.08); background: var(--chocolate-m); }
+#carrinho-contador {
+  position: absolute; top: -2px; right: -2px;
+  background: #C0392B; color: #fff;
+  font-size: 0.75rem; font-weight: bold;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center;
+}
+.modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000; opacity: 1; transition: opacity var(--transicao);
+  padding: 1rem;
+}
+.modal.oculto { opacity: 0; pointer-events: none; visibility: hidden; }
+.modal-conteudo {
+  background: #fff; width: 100%; max-width: 420px;
+  border-radius: var(--raio); padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  max-height: 90vh; display: flex; flex-direction: column;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--creme-escuro); padding-bottom: 1rem; margin-bottom: 1rem; }
+.btn-fechar { background: none; font-size: 1.6rem; color: var(--chocolate-m); line-height: 1; transition: color 0.2s; }
+.btn-fechar:hover { color: #C0392B; }
+.carrinho-itens { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; }
+.carrinho-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; border-bottom: 1px dashed var(--creme-escuro); padding-bottom: 0.5rem;}
+.carrinho-item-info { display: flex; flex-direction: column; color: var(--chocolate); }
+.btn-remover-item { background: #FADBD8; color: #C0392B; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; transition: 0.2s; }
+.btn-remover-item:hover { background: #C0392B; color: #fff; }
+.checkout-cep input { padding: 0.6rem; border: 1.5px solid var(--creme-escuro); border-radius: 8px; flex: 1; outline: none; }
+.checkout-cep button { background: var(--chocolate); color: #fff; padding: 0.6rem 1rem; border-radius: 8px; font-weight: 500;}
+.checkout-cep small { display: block; margin-top: 0.4rem; color: var(--chocolate-m); font-size: 0.8rem; min-height: 1.2em; }
+
+/* ============================================
    DARK MODE
    ============================================ */
 
@@ -523,6 +567,9 @@ button { cursor: pointer; font-family: inherit; border: none; }
     body.dark-mode .card-preco {
       color: var(--pessego-cl);
     }
+    body.dark-mode .modal-conteudo { background-color: #1f1f1f; color: #e0e0e0; }
+    body.dark-mode .carrinho-item-info, body.dark-mode .btn-fechar { color: #e0e0e0; }
+    body.dark-mode .checkout-cep input { background: #121212; color: #fff; border-color: #333; }
     .btn-dark-mode {
       background: none;
       border: none;
