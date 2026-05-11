@@ -1,10 +1,10 @@
-# 🍬 Doces da Dona Maria
+# Doces da Dona Maria
 
 Sistema frontend para divulgação e gerenciamento de doces artesanais.
 
 ---
 
-## 📁 Estrutura de pastas
+## Estrutura de pastas
 
 ```
 doces-dona-maria/
@@ -28,7 +28,7 @@ doces-dona-maria/
 
 ---
 
-## 🏗️ Padrão de organização
+## Padrão de organização
 
 O projeto utiliza uma separação de responsabilidades inspirada no padrão **MVC simplificado**:
 
@@ -43,7 +43,7 @@ O projeto utiliza uma separação de responsabilidades inspirada no padrão **MV
 
 ---
 
-## 🔧 Como executar
+## Como executar
 
 O projeto é 100% frontend estático — **não precisa de servidor**.
 
@@ -52,11 +52,11 @@ O projeto é 100% frontend estático — **não precisa de servidor**.
 3. Acesse `admin.html` para entrar no painel administrativo
    - Senha padrão: **maria123**
 
-> ⚠️ Para que as imagens externas (Unsplash) carregem, é necessário conexão com internet.
+> Para que as imagens externas (Unsplash) carregem, é necessário conexão com internet.
 
 ---
 
-## 🍬 Funcionalidades implementadas
+## Funcionalidades implementadas
 
 ### Página pública (`index.html`)
 - Catálogo com grade responsiva de cards de doces
@@ -78,7 +78,7 @@ O projeto é 100% frontend estático — **não precisa de servidor**.
 
 ---
 
-## 📦 Uso de JSON
+## Uso de JSON
 
 O JSON é utilizado em três momentos distintos:
 
@@ -88,7 +88,7 @@ O JSON é utilizado em três momentos distintos:
 
 ---
 
-## 📱 Responsividade
+## Responsividade
 
 O layout se adapta a três breakpoints:
 
@@ -100,7 +100,7 @@ O layout se adapta a três breakpoints:
 
 ---
 
-## 🎨 Decisões de design
+## Decisões de design
 
 - **Paleta**: tons de chocolate, caramelo e creme — remetem à identidade visual de uma confeitaria artesanal
 - **Tipografia**: Playfair Display (display/serif) + DM Sans (corpo) — combinação entre elegância e legibilidade
@@ -109,7 +109,7 @@ O layout se adapta a três breakpoints:
 
 ---
 
-## 🚫 Limitações conhecidas
+## Limitações conhecidas
 
 - A autenticação é fictícia (apenas `sessionStorage`) — não há segurança real
 - As imagens são URLs externas do Unsplash; em produção, deveriam ser hospedadas localmente

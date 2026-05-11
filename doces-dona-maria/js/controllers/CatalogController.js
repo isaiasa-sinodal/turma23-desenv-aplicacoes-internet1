@@ -79,7 +79,6 @@ const CatalogController = (() => {
 
     if (docesFiltrados.length === 0) {
       grid.innerHTML = `<div class="sem-resultados">
-        <span>🍬</span>
         <p>Nenhum doce encontrado. Tente outra busca!</p>
       </div>`;
       return;

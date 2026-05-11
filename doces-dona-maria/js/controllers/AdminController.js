@@ -106,13 +106,13 @@ const AdminController = (() => {
       if (index !== -1) {
         dados.id = idEditando;
         doces[index] = new Candy(dados);
-        _mostrarToast("✏️ Doce atualizado com sucesso!");
+        _mostrarToast("Doce atualizado com sucesso!");
       }
     } else {
       // CREATE
       const novoDoce = new Candy(dados);
       doces.push(novoDoce);
-      _mostrarToast("🍬 Doce cadastrado com sucesso!");
+      _mostrarToast("Doce cadastrado com sucesso!");
     }
 
     StorageService.salvar(doces);
@@ -152,7 +152,7 @@ const AdminController = (() => {
     StorageService.salvar(doces);
     _renderizarLista();
     _atualizarEstatisticas();
-    _mostrarToast("🗑️ Doce removido.");
+    _mostrarToast("Doce removido.");
   }
 
   function cancelarEdicao() {
@@ -186,8 +186,8 @@ const AdminController = (() => {
         <td class="preco-col">${doce.precoFormatado}</td>
         <td class="descricao-col">${doce.descricao.substring(0, 60)}...</td>
         <td class="acoes-col">
-          <button class="btn-editar" onclick="AdminController.editarDoce('${doce.id}')">✏️ Editar</button>
-          <button class="btn-excluir" onclick="AdminController.excluirDoce('${doce.id}')">🗑️ Excluir</button>
+          <button class="btn-editar" onclick="AdminController.editarDoce('${doce.id}')">Editar</button>
+          <button class="btn-excluir" onclick="AdminController.excluirDoce('${doce.id}')">Excluir</button>
         </td>
       </tr>
     `).join("");
@@ -220,7 +220,7 @@ const AdminController = (() => {
     a.download = "doces-dona-maria.json";
     a.click();
     URL.revokeObjectURL(url);
-    _mostrarToast("📥 JSON exportado com sucesso!");
+    _mostrarToast("JSON exportado com sucesso!");
   }
 
   function importarJSON() {
@@ -238,7 +238,7 @@ const AdminController = (() => {
           StorageService.salvar(doces);
           _renderizarLista();
           _atualizarEstatisticas();
-          _mostrarToast(`✅ ${importados.length} doce(s) importado(s)!`);
+          _mostrarToast(`${importados.length} doce(s) importado(s)!`);
         } catch (err) {
           alert("Erro ao importar: " + err.message);
         }
@@ -254,7 +254,7 @@ const AdminController = (() => {
     doces = StorageService.carregar();
     _renderizarLista();
     _atualizarEstatisticas();
-    _mostrarToast("♻️ Dados restaurados!");
+    _mostrarToast("Dados restaurados!");
   }
 
   // --- Helpers ---
