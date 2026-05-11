@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dona Maria Doces | O Sabor da Felicidade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <h1>🍰 Dona Maria</h1>
+            <span>Doces Artesanais & Amor</span>
+        </div>
+        <nav>
+            <a href="index.html" class="active">🏠 Início</a>
+            <a href="admin.html">⚙️ Painel</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>O Sabor da Felicidade</h2>
+        <p>Feitos à mão, com os melhores ingredientes.</p>
+    </section>
+
+    <main>
+        <div class="filtros" id="filtros-container">
+            <button class="filter-btn active" onclick="filtrarDoces('todos', this)">Todos</button>
+            <button class="filter-btn" onclick="filtrarDoces('Bolos', this)">Bolos</button>
+            <button class="filter-btn" onclick="filtrarDoces('Brigadeiros', this)">Brigadeiros</button>
+            <button class="filter-btn" onclick="filtrarDoces('Tortas', this)">Tortas</button>
+            <button class="filter-btn" onclick="filtrarDoces('Outros', this)">Outros</button>
+        </div>
+
+        <div id="catalogo-container" class="grid-catalogo">
+            </div>
+    </main>
+
+    <script src="js/StorageService.js"></script>
+    <script src="js/CatalogoController.js"></script>
+</body>
+</html>
