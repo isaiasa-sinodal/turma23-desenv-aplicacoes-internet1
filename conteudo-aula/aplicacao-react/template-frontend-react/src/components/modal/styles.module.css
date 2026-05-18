@@ -1,0 +1,25 @@
+.modal {
+  margin: auto;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  border-radius: 4px;
+  border-width: 1px;
+  position: relative;
+}
+
+.modal:-internal-dialog-in-top-layer::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close {
+  all: unset;
+  user-select: none;
+  position: absolute;
+  right: 24px;
+}
+
+.title {
+  margin-right: 24px;
+  margin-bottom: 16px;
+}
